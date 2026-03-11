@@ -1,0 +1,37 @@
+#!/bin/sh
+# Maven Wrapper script
+# Bootstraps Maven if not found locally
+
+set -e
+
+MAVEN_PROJECTBASEDIR="${MAVEN_BASEDIR:-$(cd "$(dirname "$0")" && pwd)}"
+MAVEN_WRAPPER_JAR="$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.jar"
+MAVEN_WRAPPER_PROPERTIES="$MAVEN_PROJECTBASEDIR/.mvn/wrapper/maven-wrapper.properties"
+
+# Use JAVA_HOME if set, otherwise try to find java
+if [ -n "$JAVA_HOME" ]; then
+    JAVACMD="$JAVA_HOME/bin/java"
+else
+    JAVACMD="$(command -v java 2>/dev/null || echo "")"
+fi
+
+# Try Windows JDK path if no java found
+if [ -z "$JAVACMD" ] || [ ! -x "$JAVACMD" ]; then
+    for jdk in "/mnt/c/Program Files/Java/jdk-"*; do
+        if [ -f "$jdk/bin/java.exe" ]; then
+            JAVACMD="$jdk/bin/java.exe"
+            export JAVA_HOME="$jdk"
+            break
+        fi
+    done
+fi
+
+if [ -z "$JAVACMD" ]; then
+    echo "Error: JAVA_HOME is not set and no java command found" >&2
+    exit 1
+fi
+
+exec "$JAVACMD" \
+    -jar "$MAVEN_WRAPPER_JAR" \
+    "-Dmaven.multiModuleProjectDirectory=$MAVEN_PROJECTBASEDIR" \
+    "$@"
