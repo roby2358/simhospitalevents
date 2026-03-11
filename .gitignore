@@ -1,2 +1,4 @@
 /simhospital/
 simhospital-java/target/
+__pycache__/
+*.pyc
